@@ -32,6 +32,9 @@
 				<p:menubar>
 					<p:menuitem value="Produtos" url="produto.xhtml" />
 					<p:menuitem value="Clientes" url="cliente.xhtml" />
+					<p:submenu label="Usuario" style="float: right;" icon="ui-icon-person">
+						<p:menuitem value="Sair" action="#{loginBean.logout()}"/>
+					</p:submenu>
 				</p:menubar>
 
 			</h:form>

@@ -3,6 +3,11 @@ package br.ufpi.carrinho.util;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Map;
+
+import javax.faces.context.FacesContext;
+
+import br.ufpi.carrinho.model.Cliente;
 
 public class Utils {
 
@@ -35,5 +40,14 @@ public class Utils {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public static void salvarUsuarioNaSessao(Cliente cliente) {
+		Map<String, Object> sessionMap = FacesContext
+				.getCurrentInstance()
+				.getExternalContext()
+				.getSessionMap();
+		
+		sessionMap.put("usuarioLogado", cliente);
 	}
 }

@@ -29,7 +29,7 @@ public class ClienteDao implements Serializable {
 		TypedQuery<Cliente> query = em
 				.createQuery("SELECT c FROM Cliente c WHERE c.email = :email AND c.senha = :senha", Cliente.class);
 		query.setParameter("email", email);
-		query.setParameter("senha", Utils.convertStringToMd5(senha));
+		query.setParameter("senha", senha);
 
 		List<Cliente> clientes = query.getResultList();
 

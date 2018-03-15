@@ -11,21 +11,21 @@
 	
 	<h:form id="form" style="margin: 0 auto; width: 20%; margin-top: 20%">
 
-		<p:fieldset legend="#{msg['leg.login']}">
+		<p:fieldset legend="Login">
 			<p:growl showDetail="true" />
 
 			<h:panelGrid columns="2">
 
-				<p:outputLabel value="#{msg['cliente.email']}:" for="email" />
-				<p:inputText id="email" value="#{clienteBean.email}" required="true" />
+				<p:outputLabel value="Email:" for="email" />
+				<p:inputText id="email" value="#{loginBean.email}" required="true" />
 
-				<p:outputLabel value="#{msg['cliente.senha']}:" for="senha" />
-				<p:password id="senha" value="#{clienteBean.senha}" required="true" />
+				<p:outputLabel value="Senha:" for="senha" />
+				<p:password id="senha" value="#{loginBean.senha}" required="true" />
 
 			</h:panelGrid>
 
 			<p:commandButton id="btnEntrar" icon="ui-icon-user" value="#{msg['botao.entrar']}"
-				action="#{clienteBean.login()}" update="@form :messages" />
+				action="#{loginBean.login()}" update="@form :messages" />
 
 		</p:fieldset>
 
