@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+
+	<style>
+.ui-layout-unit {
+	border: 0px;
+}
+
+.ui-layout-north{
+	z-index: 20 !important;
+	overflow: visible !important;
+}
+
+.ui-layout-north .ui-layout-unit-content{
+	overflow: visible;
+}
+</style>
+</h:head>
+
+<h:body style="background:#c2c2c2">
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north" size="65">
+
+			<h:form>
+				<p:menubar>
+					<p:menuitem value="Produtos" url="produto.xhtml" />
+					<p:menuitem value="Clientes" url="cliente.xhtml" />
+				</p:menubar>
+
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+			<ui:insert name="centro">
+        		//page code
+        
+        	</ui:insert>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="south" size="70" style="text-align:center;">
+			<h:outputText value="© 2018 Carrinho de Compras" />
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+
+</html>

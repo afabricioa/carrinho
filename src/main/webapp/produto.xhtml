@@ -1,119 +1,86 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="template.xhtml">
 
-<h:head>
+	<ui:define name="centro">
 
-	<style>
-.ui-layout-unit {
-	border: 0px;
-}
+		<!-- 		<h1>#{msg['leg.cadastro.produtos']}</h1> -->
+		<h:form id="form">
 
-.ui-layout-north {
-	z-index: 20 !important;
-	overflow: visible !important;
-}
+			<p:growl id="messages" showDetail="true" sticky="true" />
 
-.ui-layout-north .ui-layout-unit-content {
-	overflow: visible;
-}
-</style>
+			<p:panel id="toggleable" header="Cadastro de Produtos"
+				toggleable="true" toggleSpeed="500" closeSpeed="500"
+				widgetVar="panel" style="margin-bottom:20px">
+				<h:panelGrid columns="2">
+					<h:outputLabel for="desc" value="#{msg['produto.descricao']}:" />
+					<p:inputText id="desc" value="#{produtoBean.produto.descricao}"
+						required="true" requiredMessage="#{msg['warning.descricao']}" />
 
-</h:head>
+					<p:outputLabel for="preco" value="#{msg['produto.preco']}:" />
+					<p:inputText id="preco" value="#{produtoBean.produto.preco}"
+						required="true" />
 
-<h:body style="background:#c2c2c2">
-	<p:layout fullPage="true">
+					<p:outputLabel for="tipo" value="#{msg['produto.tipo']}" />
 
-		<p:layoutUnit position="north" size="65">
-			<h:form>
-				<p:menubar>
-					<p:menuitem value="Produtos" url="produto.xhtml" />
-				</p:menubar>
-			</h:form>
-		</p:layoutUnit>
-
-		<p:layoutUnit position="center">
-
-			<h:form id="form">
-				<p:growl id="messages" showDetail="true" sticky="true" />
-
-				<p:panel id="toggleable" header="Cadastro de Produtos"
-					toggleable="true" toggleSpeed="500" closeSpeed="500"
-					widgetVar="panel" style="margin-bottom:20px">
-					<h:panelGrid columns="2">
-						<h:outputLabel for="desc" value="#{msg['produto.descricao']}:" />
-						<p:inputText id="desc" value="#{produtoBean.produto.descricao}"
-							required="true" requiredMessage="#{msg['warning.descricao']}" />
-
-						<p:outputLabel for="preco" value="#{msg['produto.preco']}:" />
-						<p:inputText id="preco" value="#{produtoBean.produto.preco}"
-							required="true" />
-
-						<p:outputLabel for="tipo" value="#{msg['produto.tipo']}" />
-
-						<p:selectOneMenu id="tipo" value="#{produtoBean.produto.tipo}"
-							style="width:125px" required="true">
-							<f:selectItem itemLabel="Selecione um tipo" itemValue="" />
-							<f:selectItems value="#{produtoBean.tipos()}" 
-							var="tipo" itemLabel="#{tipo}" itemValue="#{tipo}"/>
-						</p:selectOneMenu>
-						
-						<p:commandButton value="#{msg['botao.salvar']}"
-							actionListener="#{produtoBean.salvaProduto()}" ajax="true"
-							update="@form :#{p:component('messages')} :#{p:component('table')}" />
-
-					</h:panelGrid>
-				</p:panel>
-			</h:form>
-
-			<h:form>
-				<p:panel id="toggleable2" header="#{msg['produto.lista']}"
-					toggleable="true" toggleSpeed="500" closeSpeed="500"
-					widgetVar="panel2" style="margin-bottom:20px">
-					
-					<h:panelGrid columns="1">
-						<p:dataTable id="table" var="produto"
-							value="#{produtoBean.listarProdutos()}">
-
-							<p:column headerText="#{msg['produto.descricao']}">
-								<h:outputText value="#{produto.descricao}" />
-							</p:column>
-
-							<p:column headerText="#{msg['produto.tipo']}"
-								style="text-align:center;">
-								<h:outputText value="#{produto.tipo}" />
-							</p:column>
-
-							<p:column headerText="#{msg['produto.preco']}">
-								<h:outputText value="#{produto.preco}">
-									<f:convertNumber pattern="R$ #,##0.00" />
-								</h:outputText>
-							</p:column>
-<!-- 							<p:column> -->
-<!-- 								<p:commandButton actionListener="#{produtoBean.editar(produto)}" -->
-<!-- 									value="Editar" update="@form :#{p:component('form')}" -->
-<!-- 									ajax="true"> -->
-
-<!-- 								</p:commandButton> -->
-<!-- 							</p:column> -->
-
-						</p:dataTable>
-					</h:panelGrid>
-				</p:panel>
-
-			</h:form>
-
-		</p:layoutUnit>
-
-		<p:layoutUnit position="south" size="70" style="text-align:center;">
-			<h:outputText value="© 2018 Carrinho de Compras" />
-		</p:layoutUnit>
+					<p:selectOneMenu id="tipo" value="#{produtoBean.produto.tipo}"
+						style="width:125px" required="true">
+						<f:selectItem itemLabel="Selecione um tipo" itemValue="" />
+						<f:selectItems value="#{produtoBean.tipos()}" var="tipo"
+							itemLabel="#{tipo}" itemValue="#{tipo}" />
+					</p:selectOneMenu>
 
 
-	</p:layout>
-</h:body>
+					<p:commandButton value="#{msg['botao.salvar']}"
+						actionListener="#{produtoBean.salvaProduto()}" ajax="true"
+						update="@form :#{p:component('table')} :#{p:component('messages')}" />
 
-</html>
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+
+
+		<h:form>
+
+			<p:panel id="toggleable2" header="Lista de Produtos"
+				toggleable="true" toggleSpeed="500" closeSpeed="500"
+				widgetVar="panel2" style="margin-bottom:20px">
+				<h:panelGrid columns="1">
+					<p:dataTable id="table" var="produto"
+						value="#{produtoBean.listarProdutos()}">
+
+						<p:column headerText="#{msg['produto.descricao']}">
+							<h:outputText value="#{produto.descricao}" />
+						</p:column>
+
+						<p:column headerText="#{msg['produto.tipo']}"
+							style="text-align:center;">
+							<h:outputText value="#{produto.tipo}" />
+						</p:column>
+
+						<p:column headerText="#{msg['produto.preco']}">
+							<h:outputText value="#{produto.preco}">
+								<f:convertNumber pattern="R$ #,##0.00" />
+							</h:outputText>
+						</p:column>
+						<p:column>
+							<p:commandButton actionListener="#{produtoBean.editar(produto)}"
+								value="Editar" update="@form :#{p:component('form')}"
+								ajax="true">
+
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</h:panelGrid>
+
+			</p:panel>
+
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
+
